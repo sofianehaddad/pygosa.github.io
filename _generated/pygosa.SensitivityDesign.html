@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SensitivityDesign &#8212; pygosa  documentation</title>
+    <link rel="stylesheet" href="../_static/imacs.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ContrastSensitivityAnalysis" href="pygosa.ContrastSensitivityAnalysis.html" />
+    <link rel="prev" title="Documentation of the API" href="../api.html" /> 
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="../install.html">Get It</a></li>
+    <li><a href="../methodology.html">Methodolgy</a></li>
+    <li><a href="../api.html">Doc</a></li>
+    <li><a href="../examples.html">Examples</a></li>
+  </ul>
+  <a href="../index.html"><h1>Python Toolbox</h1></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="pygosa.ContrastSensitivityAnalysis.html" title="ContrastSensitivityAnalysis"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../api.html" title="Documentation of the API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pygosa  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sensitivitydesign">
+<h1>SensitivityDesign<a class="headerlink" href="#sensitivitydesign" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pygosa.SensitivityDesign">
+<em class="property">class </em><code class="descname">SensitivityDesign</code><span class="sig-paren">(</span><em>dist=None</em>, <em>experiment=None</em>, <em>model=None</em>, <em>input_sample=None</em>, <em>output_sample=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pygosa.SensitivityDesign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Designs for sensitivity analysis.</p>
+<p>The class enables to generate input data of a fixed size given the input probabilistic model.
+The objective is to propage them thanks to the model and store the output for appropriate sensitivity
+analysis post-processing.</p>
+<p>It is important to notice that current implementation is high CPU &amp; memory consuming O(d N^2)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>experiment</strong> : ot.Experiment</p>
+<blockquote>
+<div><p>Experiment design (LHS, Monte-Carlo…)</p>
+</div></blockquote>
+<p><strong>dist</strong> : Distribution</p>
+<blockquote>
+<div><p>Probabilistic model of input variables</p>
+</div></blockquote>
+<p><strong>model</strong> : ot.Function</p>
+<blockquote>
+<div><p>Numerical model (function) from R^n -&gt; R^q</p>
+</div></blockquote>
+<p><strong>input_sample</strong> : 2d array like</p>
+<blockquote>
+<div><p>Input sample obtained thanks to the Generate method</p>
+</div></blockquote>
+<p><strong>output_sample</strong> : 2d array like</p>
+<blockquote>
+<div><p>Output sample obtained as image of input_sample</p>
+</div></blockquote>
+<p><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>Size of sampling</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<dl class="docutils">
+<dt>The class provides three possibilities to define a full design adapted for sensitivity estimation:</dt>
+<dd><ul class="first last simple">
+<li>Provide experiment/model</li>
+<li>Provide distribution/model/size</li>
+<li>Provide input/output samples : input build thanks to the Generate method and output evaluated outside the platform</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">openturns</span> <span class="k">as</span> <span class="nn">ot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">SymbolicFunction</span><span class="p">([</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span><span class="s2">&quot;x2&quot;</span><span class="p">,</span><span class="s2">&quot;x3&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;sin(x1) + 7*sin(x2)^2 + 0.1*(x3^4)*sin(x1)&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">ComposedDistribution</span><span class="p">(</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">[</span><span class="n">ot</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)]</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sa</span> <span class="o">=</span> <span class="n">SensitivityDesign</span><span class="p">(</span><span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#pygosa.SensitivityDesign.Generate" title="pygosa.SensitivityDesign.Generate"><code class="xref py py-obj docutils literal"><span class="pre">Generate</span></code></a>([experiment,&nbsp;dist,&nbsp;size])</td>
+<td>Generate a full input design</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pygosa.SensitivityDesign.get_input_dimension" title="pygosa.SensitivityDesign.get_input_dimension"><code class="xref py py-obj docutils literal"><span class="pre">get_input_dimension</span></code></a>()</td>
+<td>Returns the input dimension</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pygosa.SensitivityDesign.get_output_dimension" title="pygosa.SensitivityDesign.get_output_dimension"><code class="xref py py-obj docutils literal"><span class="pre">get_output_dimension</span></code></a>()</td>
+<td>Returns the output dimension</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pygosa.SensitivityDesign.get_reference_sample" title="pygosa.SensitivityDesign.get_reference_sample"><code class="xref py py-obj docutils literal"><span class="pre">get_reference_sample</span></code></a>()</td>
+<td>Returns the reference sample</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pygosa.SensitivityDesign.get_size" title="pygosa.SensitivityDesign.get_size"><code class="xref py py-obj docutils literal"><span class="pre">get_size</span></code></a>()</td>
+<td>Returns the size</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="pygosa.SensitivityDesign.Generate">
+<em class="property">static </em><code class="descname">Generate</code><span class="sig-paren">(</span><em>experiment=None</em>, <em>dist=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pygosa.SensitivityDesign.Generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a full input design</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>experiment</strong> : ot.Experiment</p>
+<blockquote>
+<div><p>Experiment design (LHS, Monte-Carlo…)</p>
+</div></blockquote>
+<p><strong>dist</strong> : Distribution</p>
+<blockquote>
+<div><p>Probabilistic model of input variables</p>
+</div></blockquote>
+<p><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>Size of sampling</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<dl class="docutils">
+<dt>One should provide:</dt>
+<dd><ul class="first last simple">
+<li>An experiment class</li>
+<li>Or a distribution class + size</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">openturns</span> <span class="k">as</span> <span class="nn">ot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">ComposedDistribution</span><span class="p">(</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">[</span><span class="n">ot</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)]</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">SensitivityDesign</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygosa.SensitivityDesign.get_input_dimension">
+<code class="descname">get_input_dimension</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygosa.SensitivityDesign.get_input_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the input dimension</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygosa.SensitivityDesign.get_output_dimension">
+<code class="descname">get_output_dimension</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygosa.SensitivityDesign.get_output_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the output dimension</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygosa.SensitivityDesign.get_reference_sample">
+<code class="descname">get_reference_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygosa.SensitivityDesign.get_reference_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reference sample</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygosa.SensitivityDesign.get_size">
+<code class="descname">get_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygosa.SensitivityDesign.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the size</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Get it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methodology.html">Reference guide document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">Documentation of the API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#experiment-design">Experiment Design</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SensitivityDesign</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#contrast">Contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#mean-factors">Mean factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#quantile-factors">Quantile factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#probability-factors">Probability factors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../api.html"
+                        title="previous chapter">Documentation of the API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pygosa.ContrastSensitivityAnalysis.html"
+                        title="next chapter">ContrastSensitivityAnalysis</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="pygosa.ContrastSensitivityAnalysis.html" title="ContrastSensitivityAnalysis"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../api.html" title="Documentation of the API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pygosa  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 Imacs.
+      Last updated on Apr 06, 2018.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

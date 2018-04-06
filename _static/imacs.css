@@ -1,0 +1,373 @@
+/*
+ * nature.css_t
+ * ~~~~~~~~~~~~
+ *
+ * Sphinx stylesheet -- imacs theme.
+ *
+ * :copyright: Copyright 2016 by IMACS, see COPYRIGHT.
+ * :license: BSD, see LICENSE for details.
+ *
+ * Theme colors:
+ *
+ * MAIN blue: #2878a2
+ * Dark blue: #055781
+ * Light blue: #bed4eb
+ * MAIN green: #005500
+ * Very Light gray: #f2f2f2 (background)
+ * Light gray: #aaaaaa (border)
+ * Dark gray: #222222 (font)
+ *
+ * (IMACS orange: #ff3300)
+ * (ASERIS red: #c90232)
+ */
+@import url("basic.css");
+
+/* -- page layout ----------------------------------------------------------- */
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 100%;
+    background-color: #f2f2f2;
+    color: #222222;
+    margin: 0px auto;
+    padding: 0;
+    max-width: 1024px;
+    border: 1px solid #aaaaaa;
+}
+
+div.documentwrapper {
+    float: left;
+    width: 100%;
+}
+
+div.bodywrapper {
+    margin: 0 0 0 240px;
+}
+
+div.bodywrapper h1 {
+    margin: 0px;
+    text-align: left;
+    background-color: #bed4eb;
+    color: #005500;
+    font-size: 190%;
+}
+
+hr {
+    border: 1px solid #aaaaaa;
+}
+
+div.document {
+    background-color: #f2f2f2;
+}
+
+div.body {
+    background-color: #ffffff;
+    color: #222222;
+    padding: 0 20px 20px 20px;
+    font-size: 0.9em;
+}
+
+/* -- header --------------------------------------------------------------- */
+
+div.pageheader {
+    text-align: left;
+    background-color: #2878a2;
+    min-height: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+}
+
+div.pageheader h1 {
+    font-weight: 700;
+    font-size: 64px;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 30px 0px 0px 30px;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    float: left;
+}
+
+div.pageheader h2 {
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+    float: left;
+    padding: 30px 0px 0px 30px;
+}
+
+div.pageheader img {
+    vertical-align: middle;
+    float: left;
+}
+
+div.pageheader ul {
+    float: right;
+    color: white;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+div.pageheader li {
+    float: left;
+    margin: 0 0 0 10px;
+}
+
+div.pageheader li a {
+    color: white;
+    padding: 8px 12px;
+    font-size: 15px;
+}
+
+div.pageheader a:hover {
+    text-decoration: underline;
+}
+
+/* -- footer --------------------------------------------------------------- */
+
+div.footer {
+    background-color: #2878a2;
+    background-image: url("IMACS-logo-nobg.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    color: white;
+    width: 100%;
+    padding: 13px 0;
+    text-align: center;
+    font-size: 75%;
+}
+
+div.footer a {
+    color: #aaaaaa;
+    text-decoration: underline;
+}
+
+/* -- relbar --------------------------------------------------------------- */
+
+div.related {
+    background-color: #bed4eb;
+    line-height: 32px;
+    color: #055781;
+    font-weight: bold;
+}
+
+div.related a {
+    font-weight: normal;
+    color: #2878a2;
+}
+
+/* -- sidebar -------------------------------------------------------------- */
+
+div.sphinxsidebar {
+    font-size: 0.75em;
+    line-height: 1.5em;
+    width: 240px;
+}
+
+div.sphinxsidebarwrapper {
+    padding: 20px 0;
+}
+
+div.sphinxsidebar h3,
+div.sphinxsidebar h4 {
+    font-family: Arial, sans-serif;
+    color: #005500;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    padding: 5px 10px;
+    background-color: #bed4eb;
+}
+
+div.sphinxsidebar h4 {
+    font-size: 1.1em;
+}
+
+div.sphinxsidebar h3 a {
+    color: #005500;
+}
+
+div.sphinxsidebar p {
+    color: #aaaaaa;
+    padding: 5px 20px;
+}
+
+div.sphinxsidebar p.topless {
+}
+
+div.sphinxsidebar ul {
+    margin: 10px 20px;
+    padding: 0;
+    color: #000;
+}
+
+div.sphinxsidebar a {
+    color: #222222;
+}
+
+div.sphinxsidebar input {
+    border: 1px solid #aaaaaa;
+    font-family: sans-serif;
+    font-size: 1em;
+}
+
+div.sphinxsidebar input[type=text]{
+    margin-left: 20px;
+}
+
+/* -- body styles ----------------------------------------------------------- */
+
+a {
+    color: #2878a2;
+    text-decoration: none;
+    word-wrap: break-word;
+}
+
+a:hover {
+    color: #055781;
+    text-decoration: underline;
+}
+
+div.body h1,
+div.body h2 {
+    background-color: #bed4eb;
+    color: #005500;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+div.body h3,
+div.body h4,
+div.body h5,
+div.body h6 {
+    background-color: white;
+    color: #222222;
+    font-weight: normal;
+    text-align: left;
+}
+
+div.body h1 {
+    border-top: 20px solid white;
+    margin-top: 0;
+    font-size: 200%;
+}
+div.body h2 {font-size: 150%;}
+div.body h3 {font-size: 120%;}
+div.body h4 {font-size: 110%;}
+div.body h5 {font-size: 100%;}
+div.body h6 {font-size: 100%;}
+
+a.headerlink {
+    color: #c60f0f;
+    font-size: 0.8em;
+    padding: 0 4px 0 4px;
+    text-decoration: none;
+}
+
+a.headerlink:hover {
+    background-color: #c60f0f;
+    color: white;
+}
+
+div.body p, div.body dd, div.body li {
+    line-height: 1.5em;
+}
+
+div.admonition p.admonition-title + p {
+    display: inline;
+}
+
+div.highlight{
+    background-color: white;
+}
+
+div.note {
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+div.seealso {
+    background-color: #ffc;
+    border: 1px solid #ff6;
+}
+
+div.topic {
+    background-color: #eee;
+}
+
+div.warning {
+    background-color: #ffe4e4;
+    border: 1px solid #f66;
+}
+
+p.admonition-title {
+    display: inline;
+}
+
+p.admonition-title:after {
+    content: ":";
+}
+
+pre {
+    padding: 10px;
+    background-color: #f2f2f2;
+    color: #222222;
+    line-height: 1.2em;
+    border: 1px solid #aaaaaa;
+    font-size: 1.1em;
+    margin: 1.5em 0 1.5em 0;
+}
+
+tt {
+    background-color: #ecf0f3;
+    color: #222;
+    /* padding: 1px 2px; */
+    font-size: 1.1em;
+    font-family: monospace;
+    border: none;
+    padding: none;
+}
+
+a tt {
+    color: inherit;
+}
+
+
+a code {
+    color: inherit;
+}
+
+.viewcode-back {
+    font-family: Arial, sans-serif;
+}
+
+div.viewcode-block:target {
+    background-color: #f4debf;
+    border-top: 1px solid #ac9;
+    border-bottom: 1px solid #ac9;
+}
+
+/* ------- alternating colors in table rows -------------------------- */
+
+table.docutils tr:nth-child(even) {
+    background-color: #FDFDFD;
+}
+
+table.docutils tr:nth-child(odd) {
+    background-color: #F6F6F6;
+}
+
+table.docutils tr {
+    border-style: solid none solid none;
+    border-width: 1px 0 1px 0;
+    border-color: #ddd;
+}
+
+table.docutils td {
+    border-color: #ddd;
+}

@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PyGOSA &#8212; pygosa  documentation</title>
+    <link rel="stylesheet" href="_static/imacs.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Get it" href="install.html" /> 
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="install.html">Get It</a></li>
+    <li><a href="methodology.html">Methodolgy</a></li>
+    <li><a href="api.html">Doc</a></li>
+    <li><a href="examples.html">Examples</a></li>
+  </ul>
+  <a href="#"><h1>Python Toolbox</h1></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="install.html" title="Get it"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pygosa  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-pygosa-s-documentation">
+<h1>Welcome to PyGOSA’s documentation!<a class="headerlink" href="#welcome-to-pygosa-s-documentation" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">authors:</th><td class="field-body">Sofiane Haddad,
+Nabil Rachdi</td>
+</tr>
+<tr class="field-even field"><th class="field-name">organization:</th><td class="field-body">IMACS / Airbus Group Innovations</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">date:</th><td class="field-body">2015-09-29</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Last update:</th><td class="field-body">2018-01-29</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Funding:</th><td class="field-body"><a class="reference external" href="http://www.chorus-project.fr:5640/dokuwiki/doku.php">Chorus Project</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="xref py py-mod docutils literal"><span class="pre">pygosa</span></code> module (<em>Python Goal Oriented Sensitivity Analysis</em>) provides functions for the evaluation of sensitivity factors for some common risk functions/quantities of interest based on contrast functions.</p>
+<p>With dedicated contrasts, the toolbox computes sensitivity factors associated to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mean: the factors are similar to the Sobol ones;</li>
+<li>Probability: factors are to be compared with the FORM/SORM factors;</li>
+<li>Quantiles: the factors are new;</li>
+</ul>
+</div></blockquote>
+<p>As illustration, for the Ishigami use case, the figure illustrates the computed quantile factors for quantiles varying from 5% to 95%.</p>
+<a class="reference internal image-reference" href="_images/ishigami_example.png"><img alt="_images/ishigami_example.png" class="align-center" src="_images/ishigami_example.png" style="width: 400.0px; height: 300.0px;" /></a>
+<p>The module provides also the ability to implement easily new contrasts.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Get it</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#build-from-source">Build from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Reference guide document</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#context">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#contrast-or-loss-function-definition">Contrast (or loss function) definition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="methodology.html#feature-characterization-by-contrast">Feature characterization by contrast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methodology.html#some-usual-contrasts">Some usual contrasts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#sensitivity-with-respect-to-a-contrast">Sensitivity with respect to a contrast</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example_gosa.html">Example of using <code class="docutils literal"><span class="pre">pygosa</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example_gosa.html#Design-of-experiment">Design of experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_gosa.html#Mean-contrast-&amp;-sensitivities">Mean contrast &amp; sensitivities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_gosa.html#Quantile-sensitivities">Quantile sensitivities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_gosa.html#Probability-sensitivities">Probability sensitivities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example_contrast.html">Implementing and using a new <em>contrast</em> with <code class="docutils literal"><span class="pre">pygosa</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example_contrast.html#Design-of-experiment">Design of experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_contrast.html#Moment-of-second-order">Moment of second order</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Documentation of the API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#experiment-design">Experiment Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.SensitivityDesign.html">SensitivityDesign</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#contrast">Contrast</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.ContrastSensitivityAnalysis.html">ContrastSensitivityAnalysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#mean-factors">Mean factors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.MeanSensitivities.html">MeanSensitivities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#quantile-factors">Quantile factors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.QuantileSensitivities.html">QuantileSensitivities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#probability-factors">Probability factors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.ProbabilitySensitivities.html">ProbabilitySensitivities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="#">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Get it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Reference guide document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Documentation of the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="next chapter">Get it</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="install.html" title="Get it"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pygosa  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 Imacs.
+      Last updated on Apr 06, 2018.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Documentation of the API &#8212; pygosa  documentation</title>
+    <link rel="stylesheet" href="_static/imacs.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SensitivityDesign" href="_generated/pygosa.SensitivityDesign.html" />
+    <link rel="prev" title="Implementing and using a new contrast with pygosa" href="example_contrast.html" /> 
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="install.html">Get It</a></li>
+    <li><a href="methodology.html">Methodolgy</a></li>
+    <li><a href="#">Doc</a></li>
+    <li><a href="examples.html">Examples</a></li>
+  </ul>
+  <a href="index.html"><h1>Python Toolbox</h1></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="_generated/pygosa.SensitivityDesign.html" title="SensitivityDesign"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="example_contrast.html" title="Implementing and using a new contrast with pygosa"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pygosa  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="documentation-of-the-api">
+<h1>Documentation of the API<a class="headerlink" href="#documentation-of-the-api" title="Permalink to this headline">¶</a></h1>
+<p>This section contains the <cite>API</cite> documentation. It regroups the description of the functions of the the <cite>pygosa</cite> library.</p>
+<div class="section" id="experiment-design">
+<h2>Experiment Design<a class="headerlink" href="#experiment-design" title="Permalink to this headline">¶</a></h2>
+<p>In the field of numerical evaluation of sensitivity features, one has in practice to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Define a mutivariate distribution with <strong>independent copula</strong>;</li>
+<li>Define a sampling method (<cite>Monte-Carlo</cite>, <cite>LHS</cite>, <cite>Sobol-Sequence</cite> and a “budget”, ie size allowed for simulations. This last one should be fixed in accordance with model complexity
+(<cite>CPU</cite> time consuming, linearity/non linearity behaviour, input dimension, risk(s) of interest…);</li>
+<li>Generate two independent input samples using the previous ingredients, says <img class="math" src="_images/math/cf678a393d969f38473abcce36e1d0f2eaf448e9.svg" alt="X_1"/> and <img class="math" src="_images/math/2b055b9374e6cdfbd53be2e3e7f9cbdbd9a07f61.svg" alt="X_2"/>;</li>
+<li>Mix <img class="math" src="_images/math/cf678a393d969f38473abcce36e1d0f2eaf448e9.svg" alt="X_1"/> and <img class="math" src="_images/math/2b055b9374e6cdfbd53be2e3e7f9cbdbd9a07f61.svg" alt="X_2"/> to get a full sample <img class="math" src="_images/math/bef21c7bb1099e9b75b613525fd95501e947d98a.svg" alt="X"/> used for sensitivity evaluations;</li>
+<li>Propagate through the model to get <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/>;</li>
+<li>Keep/store both <img class="math" src="_images/math/bef21c7bb1099e9b75b613525fd95501e947d98a.svg" alt="X"/> and <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/>;</li>
+<li>Evaluate the feature importance, plot data/pie chart…;</li>
+</ul>
+</div></blockquote>
+<p>As crude <strong>Monte-Carlo</strong> designs are implemented, if the input dimension is <img class="math" src="_images/math/af338b0f36c212027ca29e7d652f140b32f24dbd.svg" alt="d"/> and <img class="math" src="_images/math/a7cfc0cbd5e064e1470d76f8dcbaffb4a45fb7c3.svg" alt="N"/> is the “budget” size allowed, then the <strong>full</strong> <img class="math" src="_images/math/bef21c7bb1099e9b75b613525fd95501e947d98a.svg" alt="X"/> sample is of size <strong>:math:`N + d times N times N`</strong>.
+It is a major drawback.</p>
+<p>However the benefit is that we could evaluate <em>several quantities of interest</em> once output model is computed (<img class="math" src="_images/math/db68c1b58b0e0840702a7a6539a5253887a9cd69.svg" alt="\alpha"/> -quantiles for various <img class="math" src="_images/math/db68c1b58b0e0840702a7a6539a5253887a9cd69.svg" alt="\alpha"/> in [0, 1], mean, moments,…)</p>
+<p>The <cite>SensitivityDesign</cite> class helps to perform the six first steps described above (all except evaluation of features).
+The <em>propagation step</em> (fifth step) could be done inside the module if the model is available (as <cite>OpenTURNS.Function</cite> ) or <em>outside</em> if model is for example a cluster-code.
+For that purpose, the <cite>Generate</cite> method in <cite>SensitivityDesign</cite> class builds and returns the full <img class="math" src="_images/math/bef21c7bb1099e9b75b613525fd95501e947d98a.svg" alt="X"/> sample.
+Propagation is handled by user outside the platform. Finally both the <img class="math" src="_images/math/bef21c7bb1099e9b75b613525fd95501e947d98a.svg" alt="X"/> and <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> (model output) are provided to the class.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="_generated/pygosa.SensitivityDesign.html#pygosa.SensitivityDesign" title="pygosa.SensitivityDesign"><code class="xref py py-obj docutils literal"><span class="pre">SensitivityDesign</span></code></a>([dist,&nbsp;experiment,&nbsp;model,&nbsp;…])</td>
+<td>Designs for sensitivity analysis.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="contrast">
+<h2>Contrast<a class="headerlink" href="#contrast" title="Permalink to this headline">¶</a></h2>
+<p>Once designs defined, the final objective is to evaluate sensitivity features associated to a quantity of interest (or risk).</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="_generated/pygosa.ContrastSensitivityAnalysis.html#pygosa.ContrastSensitivityAnalysis" title="pygosa.ContrastSensitivityAnalysis"><code class="xref py py-obj docutils literal"><span class="pre">ContrastSensitivityAnalysis</span></code></a>(mcsp)</td>
+<td>Generic sensitivity class</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mean-factors">
+<h2>Mean factors<a class="headerlink" href="#mean-factors" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="_generated/pygosa.MeanSensitivities.html#pygosa.MeanSensitivities" title="pygosa.MeanSensitivities"><code class="xref py py-obj docutils literal"><span class="pre">MeanSensitivities</span></code></a>(mcsp)</td>
+<td>Sensitivity of the mean function.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="quantile-factors">
+<h2>Quantile factors<a class="headerlink" href="#quantile-factors" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="_generated/pygosa.QuantileSensitivities.html#pygosa.QuantileSensitivities" title="pygosa.QuantileSensitivities"><code class="xref py py-obj docutils literal"><span class="pre">QuantileSensitivities</span></code></a>(mcsp)</td>
+<td>Sensitivity of the quantile function.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="probability-factors">
+<h2>Probability factors<a class="headerlink" href="#probability-factors" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="_generated/pygosa.ProbabilitySensitivities.html#pygosa.ProbabilitySensitivities" title="pygosa.ProbabilitySensitivities"><code class="xref py py-obj docutils literal"><span class="pre">ProbabilitySensitivities</span></code></a>(mcsp)</td>
+<td>Sensitivity of the probability function.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Get it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Reference guide document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation of the API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#experiment-design">Experiment Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.SensitivityDesign.html">SensitivityDesign</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contrast">Contrast</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.ContrastSensitivityAnalysis.html">ContrastSensitivityAnalysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mean-factors">Mean factors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.MeanSensitivities.html">MeanSensitivities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quantile-factors">Quantile factors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.QuantileSensitivities.html">QuantileSensitivities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#probability-factors">Probability factors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/pygosa.ProbabilitySensitivities.html">ProbabilitySensitivities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="example_contrast.html"
+                        title="previous chapter">Implementing and using a new <em>contrast</em> with <code class="docutils literal"><span class="pre">pygosa</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="_generated/pygosa.SensitivityDesign.html"
+                        title="next chapter">SensitivityDesign</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="_generated/pygosa.SensitivityDesign.html" title="SensitivityDesign"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="example_contrast.html" title="Implementing and using a new contrast with pygosa"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pygosa  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 Imacs.
+      Last updated on Apr 06, 2018.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

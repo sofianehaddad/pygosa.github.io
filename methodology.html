@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Reference guide document &#8212; pygosa  documentation</title>
+    <link rel="stylesheet" href="_static/imacs.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: ''
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Get it" href="install.html" /> 
+  </head>
+  <body>
+<div class="pageheader">
+  <ul>
+    <li><a href="install.html">Get It</a></li>
+    <li><a href="#">Methodolgy</a></li>
+    <li><a href="api.html">Doc</a></li>
+    <li><a href="examples.html">Examples</a></li>
+  </ul>
+  <a href="index.html"><h1>Python Toolbox</h1></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Get it"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pygosa  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="reference-guide-document">
+<h1>Reference guide document<a class="headerlink" href="#reference-guide-document" title="Permalink to this headline">¶</a></h1>
+<p>This section contains the reference guide, which is the theoretical documentation.</p>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h2>
+<p>From more than one decade, uncertainty propagation and sensitivity analysis are widely used to handle mathematical models of industrial problems involving many parameters or variables: geophysics and oil reservoir, safety in
+nuclear industry, soil pollution, and more generally domains where it can be found heavy computation codes with large number of inputs and complex computations so that only few simulations of these codes can be run.</p>
+<p>The uncertainty propagation methodology uses random variables as inputs, even for deterministic codes, and study the distribution (or some characteristics) of the output. It is justified on the one hand by the poor knowledge
+of the input parameter (or variables), and on the other hand by the relatively small number of observed output available.</p>
+<p>Very often, some of the input variables strongly affect the output (or a characteristic), while others have a small effect (and even no effect). The sensitivity analysis try to quantify these effects.</p>
+<p>The module presents new indicators.</p>
+</div>
+<div class="section" id="contrast-or-loss-function-definition">
+<h2>Contrast (or loss function) definition<a class="headerlink" href="#contrast-or-loss-function-definition" title="Permalink to this headline">¶</a></h2>
+<p>Let us set <img class="math" src="_images/math/a01767bfd5cd11a5df9711bef31674eb09d9516d.svg" alt="\Theta"/> be some generic set and <img class="math" src="_images/math/ffe9616beb8c7daa27d7ba6f96e0d38f980e3ef9.svg" alt="Q"/> be some probability measure on a space <img class="math" src="_images/math/595b7bfe93f9a502d092440f56ae4f009e86e2c4.svg" alt="\mathcal{Y}"/>.
+A (<img class="math" src="_images/math/dba2b615e9d4de951c4941149dcf987adf5cf806.svg" alt="\Theta, Q"/>)-<strong>contrast function</strong>, or simply <strong>contrast function</strong>, is defined as any function <img class="math" src="_images/math/22e7bbdc5bdeef74134a5feb0a44f7269c104e83.svg" alt="\psi"/>:</p>
+<div class="math">
+<p><img src="_images/math/3e807d498d6d273681d481165e5182ab77fd05c1.svg" alt="\psi : \Theta &amp; \longrightarrow  L_{1}(Q)
+
+\theta &amp; \longmapsto \psi(\cdot, \theta)  :  y\in\mathcal{Y} \longmapsto \Psi(\rho,y)"/></p>
+</div><p>such that</p>
+<div class="math">
+<p><img src="_images/math/f521b885c45f326464dd1657558b4bc53c33d0e1.svg" alt="\theta^{*} = \underset{\theta \in \Theta}{argmin\ } \mathbb{E}_{Y \sim Q} \psi(Y; \theta)"/></p>
+</div><p>is <em>unique</em>. The function <img class="math" src="_images/math/432461f4b83be7e3442a0ea64a62a43a752f070c.svg" alt="\Psi  : \theta \mapsto \mathbb{E}_{Y \sim Q}\, \psi(Y; \theta)"/> is the <strong>average contrast function</strong>, or abusively contrast function if there is no ambiguity.</p>
+<p>The contrast function is a very useful object in <em>Statistical Learning Theory</em> where it defines estimation procedures of some feature <img class="math" src="_images/math/b822967858c51581559f0af0b2482c2253f9c70a.svg" alt="\theta^{*} \in \Theta"/> (scalar or functional) associated to a random variable <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/>.</p>
+<p>For instance, when observing a <img class="math" src="_images/math/dc50b6bc4de97b0c974cd4ba9d5243ef3192864a.svg" alt="n"/>-sample <img class="math" src="_images/math/52bd2f06925fe1e05417f58e658a0222b53d8913.svg" alt="(Y_1,\ldots,Y_n)"/> of the random variable <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/>, an estimator of <img class="math" src="_images/math/ed0a93425ce494649c665f2080b38edea3d0cd5a.svg" alt="\theta^{*}"/> is given by <img class="math" src="_images/math/0da95873e2f4dcb3455256379550e36280ca3af7.svg" alt="\widehat\theta=\mbox{Argmin}_{\theta} \Psi_n(\theta)"/>, where <img class="math" src="_images/math/e55b436cdff124e9cd46476c58f10135965f167f.svg" alt="\Psi_n"/> is obtained by substituting the expectation <img class="math" src="_images/math/0f5939d45a3e237ae1307d4e93c7ac8a03b27c33.svg" alt="w.r.t."/> the variable <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> by the expectation <img class="math" src="_images/math/0f5939d45a3e237ae1307d4e93c7ac8a03b27c33.svg" alt="w.r.t."/> the empirical measure of the sample. It reads:</p>
+<div class="math">
+<p><img src="_images/math/45e539cae204e81f4b60446ae9824bf0676dd25d.svg" alt="\Psi_n(\theta)=\frac{1}{n}\sum_{i=1}^n \psi(Y_i;\theta)."/></p>
+</div><p>Then, considering for example the following contrast function</p>
+<div class="math">
+<p><img src="_images/math/7a35de171a760a64629c26549fff27ee09dd00a7.svg" alt="\psi : (y; \theta)\mapsto (y - \theta)^2"/></p>
+</div><p>provides the well known estimation procedure of the mean</p>
+<div class="math">
+<p><img src="_images/math/32a342f8075728c07e148e7515731c2075036cee.svg" alt="\widehat\theta= \underset{\theta}{argmin\ } \frac{1}{n}\sum_{i=1}^n (Y_i - \theta)^2"/></p>
+</div><p>That gives obviously</p>
+<div class="math">
+<p><img src="_images/math/b174fdf10e843da1c7823903cf313cc96a83726d.svg" alt="\widehat\theta = \frac{1}{n}\sum_{i=1}^n Y_i"/></p>
+</div><p>The same stands for “functional” features associated to the random variable <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> (density function, etc.).</p>
+<div class="section" id="feature-characterization-by-contrast">
+<h3>Feature characterization by contrast<a class="headerlink" href="#feature-characterization-by-contrast" title="Permalink to this headline">¶</a></h3>
+<p>The previous writing provides a characterization of a feature <img class="math" src="_images/math/84d2bb6df990993f7a277065c90363bc797d0f83.svg" alt="\theta^*"/> of <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> by a contrast <img class="math" src="_images/math/22e7bbdc5bdeef74134a5feb0a44f7269c104e83.svg" alt="\psi"/>. Notice that it may exist various contrasts <img class="math" src="_images/math/22e7bbdc5bdeef74134a5feb0a44f7269c104e83.svg" alt="\psi"/> characterizing <img class="math" src="_images/math/84d2bb6df990993f7a277065c90363bc797d0f83.svg" alt="\theta^*"/>.</p>
+<p>The previous remark comes from the PhD work of N. Rachdi.</p>
+</div>
+<div class="section" id="some-usual-contrasts">
+<h3>Some usual contrasts<a class="headerlink" href="#some-usual-contrasts" title="Permalink to this headline">¶</a></h3>
+<p>Let us give an non exhaustive list of contrasts that allow to estimate various parameters associated to a probability distribution. We give the classical contrasts associated to each parameter.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Central parameters:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>The mean :  <img class="math" src="_images/math/ecc0962d7fe7958363631d76a2424632577b5707.svg" alt="\Psi(\theta)=\mathbb E |Y-\theta|^2"/>.</li>
+<li>The median (in <img class="math" src="_images/math/0a8145b4f4a5fae7a82dc83cdc07b78a48e5bcee.svg" alt="\mathbb R"/>) : <img class="math" src="_images/math/2ccf9ccb26efae53f97d91d429e91be1c6b3b46f.svg" alt="\Psi(\theta)=\frac{1}{2}\mathbb E|Y-\theta|"/>.</li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p class="first">An excess probability : <img class="math" src="_images/math/194161c7bbfc561c3bbb022e555622a9af65f769.svg" alt="\Psi(\theta)=\mathbb E |{\bf1}_{Y\ge t}-\theta|^2"/>.</p>
+</li>
+<li><p class="first">All the probability tail: <img class="math" src="_images/math/56300f2f5ae65496354b0cef3be341c9807ca780.svg" alt="\Psi(\theta)=\int_{t_0}^\infty \mathbb E |{\bf1}_{Y\ge t}-\theta(t)|^2 dt"/>.</p>
+</li>
+<li><p class="first">The <img class="math" src="_images/math/db68c1b58b0e0840702a7a6539a5253887a9cd69.svg" alt="\alpha"/>-quantile : <img class="math" src="_images/math/e8171e193a219491d1073c5538f563709e3d0ffd.svg" alt="\Psi(\theta)=\mathbb E (Y-\theta)(\alpha -{\bf1}_{Y\le\theta})"/>.</p>
+</li>
+<li><p class="first">All the quantile “tail”: <img class="math" src="_images/math/ff9247e81608777e330bc1240fc4a4488d5aa1e6.svg" alt="\Psi(\theta)=\int_{\alpha_0}^1 \mathbb E (Y-\theta(\alpha))(\alpha -{\bf1}_{Y\le\theta(\alpha)})d\alpha"/>.</p>
+</li>
+<li><p class="first">The probability density function, which is an infinite dimensional parameter.</p>
+<ul>
+<li><p class="first">Using the kernel method with a given kernel <cite>K</cite> and a window size <cite>r&gt;0</cite>, we set <img class="math" src="_images/math/7948ea5e8b1b24655cc6c78d66726b8768681a54.svg" alt="K_r(Y)=\frac{1}{r}K(\frac{Y}{r})"/> and the contrast is:</p>
+<div class="math">
+<p><img src="_images/math/ad010ed69c8fcbceb3c30203687d0d9b32258093.svg" alt="\Psi(\theta)=\mathbb E \int_{-\infty}^{+\infty}(K_r(Y-t)-\theta(t))^2dt."/></p>
+</div><p>In fact it is an unbiased estimator of the convolution of the <em>p.d.f</em> with <cite>K_r</cite>, which is the target “parameter”.</p>
+</li>
+<li><p class="first">Using an orthonormal <img class="math" src="_images/math/3ec29a1f46d41f459116243d13cc30a649af3d7d.svg" alt="\mathbb L^2"/> basis <img class="math" src="_images/math/1461dc1529f9934d86b23bf9da228723d163d949.svg" alt="(\varphi_j,j\ge 0)"/> truncated at the order~ <img class="math" src="_images/math/a7cfc0cbd5e064e1470d76f8dcbaffb4a45fb7c3.svg" alt="N"/> :</p>
+<div class="math">
+<p><img src="_images/math/8c4dfcb816cbb11df0e6740433b944510634ec47.svg" alt="\Psi(\theta)=\mathbb E \sum_{j=0}^N (\varphi_j(Y)-\int_{-\infty}^{+\infty} \varphi_j(u)\theta(u) du)^2."/></p>
+</div><p>What is really estimated here, is the orthogonal projection of the <em>p.d.f</em> on the truncated basis, which is the target “parameter”.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>Most of these contrasts are of quadratic type, contrary to the contrasts associated to the quantiles.</p>
+</div>
+</div>
+<div class="section" id="sensitivity-with-respect-to-a-contrast">
+<h2>Sensitivity with respect to a contrast<a class="headerlink" href="#sensitivity-with-respect-to-a-contrast" title="Permalink to this headline">¶</a></h2>
+<p>We are interested in the sensitivity of a scalar output <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> to an input variable <img class="math" src="_images/math/7edce7e091649ddaaa12724f16ca8adeabef31f3.svg" alt="X_k"/>, we assume that <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> is a function of some input variables:</p>
+<div class="math">
+<p><img src="_images/math/e6f9ff13f6b7b2391f367214bace4e7521b7256c.svg" alt="Y=h(X_1,\ldots,X_d)=h({\bf X})"/></p>
+</div><p>Generally <img class="math" src="_images/math/287f8adc72babf3e4b81f4266f4392176081a8bd.svg" alt="h"/> is a “black box”, in the sense that <img class="math" src="_images/math/287f8adc72babf3e4b81f4266f4392176081a8bd.svg" alt="h"/> is not explicit but results from heavy computer code, complex mathematical (or statistical) models.
+For sake of simplicity let us consider a scalar output <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> but the method can easily be extended to a multiple output <img class="math" src="_images/math/617f3a9cb21817ad7fb409fc496f9c045daa339d.svg" alt="Y\in \mathbb{R}^q"/></p>
+<p>We assume that <img class="math" src="_images/math/a1f36f7c1524752ba9875708f4a7f088bdd5a16d.svg" alt="\Psi"/> is a contrast associated to a “parameter” <img class="math" src="_images/math/84d2bb6df990993f7a277065c90363bc797d0f83.svg" alt="\theta^*"/> where <img class="math" src="_images/math/66ca619b7a338d2a8c7fea17b118884f28e2cd97.svg" alt="\theta^* =\mbox{Argmin} \Psi(\theta)"/>.
+Moreover <img class="math" src="_images/math/a1f36f7c1524752ba9875708f4a7f088bdd5a16d.svg" alt="\Psi"/> writes <img class="math" src="_images/math/7d22868def040024f860e9b1207487a6c87ef455.svg" alt="\Psi(\theta)=\mathbb E\psi(Y;\theta)"/></p>
+<p>Let <img class="math" src="_images/math/7d22868def040024f860e9b1207487a6c87ef455.svg" alt="\Psi(\theta)=\mathbb E\psi(Y;\theta)"/> be a contrast. The contrast variation due to <img class="math" src="_images/math/7edce7e091649ddaaa12724f16ca8adeabef31f3.svg" alt="X_k"/> is defined as :</p>
+<div class="math">
+<p><img src="_images/math/c864a64a5872d0f87e875859baf821ab46b52757.svg" alt="V_k= \min_\theta \Psi(\theta)-\mathbb E( \min_\theta \mathbb E(\psi(Y;\theta)|X_k))"/></p>
+</div><p>and we have <img class="math" src="_images/math/4a281b540d7dfd77462fec7c50ecbacfa3e42e39.svg" alt="V_k \geq 0"/>. We can also write <img class="math" src="_images/math/40a766617f1c0eb60fc8c401260be5448362e3b1.svg" alt="V_k"/> as follows</p>
+<div class="math">
+<p><img src="_images/math/b0f745331c8b3d846cce878ccb7b28a99674f66a.svg" alt="V_k =  \mathbb{E}_{(X_k,Y)}\left(\psi(Y;\theta^*)  - \psi(Y;\theta_k(X_k))\right) \label{contrast_var}"/></p>
+</div><p>where <img class="math" src="_images/math/f0100bf650fe6698db54633bba875557297e5ba0.svg" alt="\theta^* = \displaystyle{\\argmin_{\theta} \Psi(\theta)}"/> and <img class="math" src="_images/math/f69fd34be360836a6df34a301a5ae34b3e1c7e61.svg" alt="\theta_k(x) = \displaystyle{\\argmin_{\theta} \mathbb E(\psi(Y;\theta)|X_k = x)}"/></p>
+<p>Notice that the inequality</p>
+<div class="math">
+<p><img src="_images/math/0b5085c4f96f097446b24e4244fa94860984859f.svg" alt="\mathbb E(\min_\theta \mathbb E(\psi(Y;\theta)|X_k))\le \min_\theta \mathbb E(\mathbb E(\psi(Y;\theta)|X_k))= \Psi(\theta)"/></p>
+</div><p>implies that <img class="math" src="_images/math/40a766617f1c0eb60fc8c401260be5448362e3b1.svg" alt="V_k"/> is non negative.</p>
+<p>Moreover, let us remark that if <img class="math" src="_images/math/2baf7cf7dc3371befb37812a8b64e9ea70d4c874.svg" alt="Y"/> does not depend on <img class="math" src="_images/math/7edce7e091649ddaaa12724f16ca8adeabef31f3.svg" alt="X_k"/>, <img class="math" src="_images/math/40a766617f1c0eb60fc8c401260be5448362e3b1.svg" alt="V_k"/> is <em>0</em> and conversely if <img class="math" src="_images/math/423f3e0f2e3c73901ffff4b4f98e36c3860b69b1.svg" alt="Y=h(X_k)"/> then <img class="math" src="_images/math/40a766617f1c0eb60fc8c401260be5448362e3b1.svg" alt="V_k"/> is maximum.</p>
+<p>We make the following assumption:</p>
+<div class="math" id="equation-assumption">
+<p><span class="eqno">(1)<a class="headerlink" href="#equation-assumption" title="Permalink to this equation">¶</a></span><img src="_images/math/57bb64ea0799ebd642d7e8ff1f80304e28b4420e.svg" alt="\mathbb E \min_{\theta}\psi(Y;\theta)\in  \mathbb R"/></p>
+</div><p>Notice that all the contrasts identified satisfy <a class="reference internal" href="#equation-assumption">(1)</a> since <img class="math" src="_images/math/5620812b814bfe4014afd963d1c74bb8ede47b2b.svg" alt="\min_{\theta}\psi(Y;\theta)=0"/>.</p>
+<p>Now we are in position to define a new index generalizing the Sobol one based on contrasts that satisfy <a class="reference internal" href="#equation-assumption">(1)</a> .</p>
+<p><img class="math" src="_images/math/67fbde054b73a7d78b17683d347b94f00349e78a.svg" alt="\boldsymbol{\psi}"/> -<strong>Indices</strong>: assume that a contrast <img class="math" src="_images/math/7d22868def040024f860e9b1207487a6c87ef455.svg" alt="\Psi(\theta)=\mathbb E\psi(Y;\theta)"/> satisfies the first assumption. The  <img class="math" src="_images/math/22e7bbdc5bdeef74134a5feb0a44f7269c104e83.svg" alt="\psi"/> -index of the variable <img class="math" src="_images/math/5f1c71004e0ba58914d0d694e3d49b72f5539dbd.svg" alt="Y=h(X_1,\ldots,X_d)"/> with respect to the contrast <img class="math" src="_images/math/a1f36f7c1524752ba9875708f4a7f088bdd5a16d.svg" alt="\Psi"/> and the variable <img class="math" src="_images/math/7edce7e091649ddaaa12724f16ca8adeabef31f3.svg" alt="X_k"/> is defined as:</p>
+<div class="math">
+<p><img src="_images/math/77acc7bc3c706bc5cb932e9d7b1b5fc5f8943778.svg" alt="S^k_{\psi}=\frac{V_k}{ \min_\theta \Psi(\theta)-\mathbb E \min_{\theta}\psi(Y;\theta)}"/></p>
+</div><p>or</p>
+<div class="math">
+<p><img src="_images/math/5cfb0ac8e90a6edb273be0d997de24af08a6e9f7.svg" alt="S^k_{\psi}= \frac{\mathbb{E}_{(X_k,Y)}\left(\psi(Y;\theta^*)  - \psi(Y;\theta_k(X_k))\right)}{ \min_\theta \Psi(\theta)-\mathbb E \min_{\theta}\psi(Y;\theta)}. \label{def_psi_indice}"/></p>
+</div><p>Note that these indices could be extended to higher order.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Get it</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reference guide document</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#context">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contrast-or-loss-function-definition">Contrast (or loss function) definition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#feature-characterization-by-contrast">Feature characterization by contrast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#some-usual-contrasts">Some usual contrasts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sensitivity-with-respect-to-a-contrast">Sensitivity with respect to a contrast</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Documentation of the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Get it</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="examples.html"
+                        title="next chapter">Examples</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Get it"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pygosa  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 Imacs.
+      Last updated on Apr 06, 2018.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
